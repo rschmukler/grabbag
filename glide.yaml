@@ -1,0 +1,3 @@
+package: github.com/rschmukler/grabbag
+import:
+- package: github.com/stretchr/testify
