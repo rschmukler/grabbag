@@ -26,6 +26,9 @@ func TestGrabBag_Has(t *testing.T) {
 
 	result = gb.Has("hello.someOther.field")
 	assert.Equal(t, result, false, "Grab bag returned a false positive for has")
+
+	result = gb.Has("nested.inner.another.value")
+	assert.Equal(t, result, true, "Grab bag returned a false negative for has on a nested field")
 }
 
 func TestGrabBag_Nested(t *testing.T) {
@@ -33,6 +36,9 @@ func TestGrabBag_Nested(t *testing.T) {
 	gb := FromData(sampleData())
 	result := gb.String("nested.hello")
 	assert.Equal(t, "world inner", result, "Grab bag did not return proper string")
+
+	i := gb.Int("nested.inner.another.value")
+	assert.Equal(t, i, 5, "Grab bag did not return a proper value for a nested int")
 }
 
 func TestGrabBag_Types(t *testing.T) {
